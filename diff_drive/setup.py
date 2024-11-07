@@ -30,7 +30,7 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, [
             'package.xml',
-            'launch/ddrive.launch.py',
+            'launch/ddrive.launch.xml',
             'config/params.yaml',
         ]),
         ('share/' + package_name + '/env-hooks', ['env-hooks/diff_drive.dsv']),
