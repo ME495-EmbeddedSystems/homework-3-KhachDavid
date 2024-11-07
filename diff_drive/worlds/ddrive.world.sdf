@@ -1,0 +1,40 @@
+<sdf version="1.6">
+  <world name="default">
+    <!-- Ground plane -->
+    <model name="asphalt_ground">
+      <uri>model://asphalt_ground</uri>
+    </model>
+
+    <!-- Jersey Barriers -->
+    <model name="jersey_barrier_1">
+      <uri>model://jersey_barrier</uri>
+    </model>
+    <model name="jersey_barrier_2">
+      <uri>model://jersey_barrier</uri>
+    </model>
+
+    <!-- Cardboard Boxes -->
+    <model name="cardboard_box_1">
+      <uri>model://cardboard_box</uri>
+    </model>
+    <model name="cardboard_box_2">
+      <uri>model://cardboard_box</uri>
+    </model>
+
+    <!-- Additional Models -->
+    <model name="golf_cart">
+      <uri>model://golf_cart</uri>
+    </model>
+    <model name="stop_light_post">
+      <uri>model://stop_light_post</uri>
+    </model>
+
+    <!-- Set the sky -->
+    <sky>
+      <color>0 0 0 1</color>
+    </sky>
+
+    <!-- Set the gravity -->
+    <gravity>0 0 -9.81</gravity>
+  </world>
+</sdf>
