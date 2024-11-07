@@ -31,6 +31,18 @@
       <pose>0 3 0 0 0 0</pose>
     </include>
 
+    <include>
+      <uri>models://shelf</uri>
+        <name>shelf</name>
+      <pose>7 3 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>models://drone</uri>
+        <name>drone</name>
+      <pose>5 3 10 0 0 0</pose>
+    </include>
+
+
     <!-- Sky Settings -->
     <sky>
       <color>0 0 0 1</color>
