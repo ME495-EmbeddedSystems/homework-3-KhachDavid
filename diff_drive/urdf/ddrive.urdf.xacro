@@ -19,9 +19,9 @@
     <xacro:property name="s4" value="${a/2}" />
 
     <!-- Robot body mass and inertia properties -->
-    <xacro:property name="m1" value="5.0" /> <!-- Body mass -->
-    <xacro:property name="m2" value="0.5" /> <!-- Wheel mass -->
-    <xacro:property name="m3" value="0.2" /> <!-- Caster mass -->
+    <xacro:property name="m1" value="1.0" /> <!-- Body mass -->
+    <xacro:property name="m2" value="10.0" /> <!-- Wheel mass -->
+    <xacro:property name="m3" value="1.0" /> <!-- Caster mass -->
 
     <xacro:macro name="inertia_body">
         <inertial>
@@ -39,7 +39,7 @@
 
     <xacro:macro name="inertia_wheel">
         <inertial>
-            <mass value="2.0" />
+            <mass value="${m2}" />
             <inertia
                 ixx="0.145833"
                 ixy="0"
@@ -53,7 +53,7 @@
 
     <xacro:macro name="inertia_caster">
         <inertial>
-            <mass value="0.1" />
+            <mass value="${m3}" />
             <inertia
                 ixx="0.0001"
                 ixy="0"
@@ -65,25 +65,13 @@
         </inertial>
     </xacro:macro>
 
-    <link name="base_footprint">
-        <visual>
-            <geometry>
-                <box size="0.01 0.01 0.01" /> <!-- A small box to define the footprint -->
-            </geometry>
-            <material name="Grey">
-                <color rgba="0.5 0.5 0.5 1.0" />
-            </material>
-        </visual>
-    </link>
-
-
     <!-- Main body -->
     <link name="base_link">
         <visual>
             <geometry>
                 <box size="${a} ${c} ${b}" />
             </geometry>
-            <material name="red">
+            <material name="blue">
                 <color rgba="1 0 0 1"/>
               </material>
         </visual>
@@ -92,7 +80,6 @@
                 <box size="${a} ${c} ${b}" />
             </geometry>
         </collision>
-        <xacro:inertia_body />
     </link>
 
     <!-- Rear left wheel -->
@@ -137,7 +124,7 @@
             <geometry>
                 <sphere radius="${r/2}" />
             </geometry>
-            <material name="red">
+            <material name="yellow">
                 <color rgba="1 0 1 1"/>
               </material>
         </visual>
@@ -155,7 +142,7 @@
             <geometry>
                 <sphere radius="${r/2}" />
             </geometry>
-            <material name="red">
+            <material name="yellow">
                 <color rgba="1 0 1 1"/>
               </material>
         </visual>
@@ -166,12 +153,6 @@
         </collision>
         <xacro:inertia_caster />
     </link>
-
-    <!-- Joints -->
-    <joint name="base_fixed_joint" type="fixed">
-        <parent link="base_footprint" />
-        <child link="base_link" />
-    </joint>
 
     <!-- Rear wheels joints -->
     <joint name="wheel_left_joint" type="continuous">

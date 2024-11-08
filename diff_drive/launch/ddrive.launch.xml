@@ -3,11 +3,6 @@
   <arg name="world" default="ddrive.world.sdf" />
   <arg name="rviz_config" default="view.rviz" description="RViz configuration file." />
 
-  <node
-    pkg="rviz2"
-    exec="rviz2"
-    name="rviz2"
-    args="-d $(find-pkg-share diff_drive)/$(var rviz_config)" />
   <include file="$(find-pkg-share diff_drive)/ddrive_rviz.launch.py" />
 
   <!-- Include the Gazebo Sim launch file -->
@@ -19,10 +14,8 @@
   <node pkg="ros_gz_bridge" exec="parameter_bridge"
     args="/model/diff_drive/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry
         /model/diff_drive/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V
-        /model/diff_drive/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist
-        /scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan
-        /world/diff_drive_world/model/diff_drive/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model
-        /clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock"
+        /cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist
+        /world/diff_drive_world/model/diff_drive/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model"
   >
     <remap from="/model/diff_drive/odometry" to="/odom" />
     <remap from="/model/diff_drive/cmd_vel" to="/cmd_vel" />
@@ -31,8 +24,5 @@
   </node>
 
   <node pkg="ros_gz_sim" exec="create"
-    args="-topic /robot_description -entity diff_drive -x 2 -y 6 -z 0.23" />
-
-
-  <!-- Launch RViz for visualization -->
+    args="-topic /robot_description -x 2 -y 6 -z 0.3" />
 </launch>

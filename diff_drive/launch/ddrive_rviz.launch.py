@@ -3,8 +3,10 @@
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 
+
 from launch.substitutions import \
-    Command, EqualsSubstitution, PathJoinSubstitution, LaunchConfiguration, NotEqualsSubstitution
+    Command, EqualsSubstitution, PathJoinSubstitution, LaunchConfiguration
+
 from launch_ros.actions import Node
 
 from launch.conditions import IfCondition
@@ -18,6 +20,24 @@ def generate_launch_description():
         DeclareLaunchArgument(name='view_only', default_value='false',
                               description='Only launch rviz'),
 
+        DeclareLaunchArgument(
+            'rviz_config',
+            default_value='view.rviz',
+            description='RViz configuration file.'
+        ),
+
+        Node(
+            package='rviz2',
+            executable='rviz2',
+            name='rviz2',
+            arguments=[
+                '-d',
+                PathJoinSubstitution([
+                    FindPackageShare('diff_drive'),
+                    LaunchConfiguration('rviz_config')
+                ])
+            ]
+        ),
         Node(
             package='robot_state_publisher',
             executable='robot_state_publisher',
