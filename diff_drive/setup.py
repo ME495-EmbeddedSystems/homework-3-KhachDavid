@@ -31,7 +31,11 @@ setup(
         ('share/' + package_name, [
             'package.xml',
             'launch/ddrive.launch.xml',
+            'launch/ddrive_rviz.launch.py',
             'config/params.yaml',
+            'urdf/ddrive.urdf.xacro',
+            'urdf/ddrive.gazebo.xacro',
+            'config/view.rviz',
         ]),
         ('share/' + package_name + '/env-hooks', ['env-hooks/diff_drive.dsv']),
 
