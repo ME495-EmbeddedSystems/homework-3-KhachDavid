@@ -52,6 +52,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'flip = diff_drive.flip:flip_entry',
         ],
     },
 )
