@@ -7,7 +7,6 @@ Panels:
         - /Global Options1
         - /Status1
         - /RobotModel1
-        - /Odometry1
       Splitter Ratio: 0.5
     Tree Height: 739
   - Class: rviz_common/Selection
@@ -142,7 +141,7 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: ""
+        Value: /odom
       Value: true
   Enabled: true
   Global Options:
@@ -190,7 +189,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 19.453996658325195
+      Distance: 2.868645429611206
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -205,10 +204,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.84539794921875
+      Pitch: -0.11960189044475555
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.7453980445861816
+      Yaw: 1.7103971242904663
     Saved: ~
 Window Geometry:
   Displays:
@@ -226,5 +225,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1920
-  X: 1920
-  Y: 0
+  X: 640
+  Y: 32

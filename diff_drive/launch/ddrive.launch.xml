@@ -1,24 +1,54 @@
 <launch>
+  <!-- Specify the world file -->
   <arg name="world" default="ddrive.world.sdf" />
+
+  <!-- 
+  
+  Node(
+    package='rviz2',
+    executable='rviz2',
+    arguments=['-d',
+               PathJoinSubstitution(
+                   [FindPackageShare('diff_drive'), 'view.rviz'])],
+    parameters=[{'use_sim_time': True}]
+),
+
+create rviz in xml
+  -->
+  <arg name="rviz_config" default="view.rviz" description="RViz configuration file."/>
+
+  <node 
+  pkg="rviz2" 
+  exec="rviz2" 
+  name="rviz2" 
+  args="-d $(find-pkg-share diff_drive)/$(var rviz_config)" />
+  <include file="$(find-pkg-share diff_drive)/ddrive_rviz.launch.py" />
+  
+  <!-- Include the Gazebo Sim launch file -->
   <include file="$(find-pkg-share ros_gz_sim)/launch/gz_sim.launch.py">
-    <arg name="gz_args" value="-v4 $(var world)"/>
+    <arg name="gz_args" value="-r $(var world)" />
   </include>
-  <node pkg="ros_gz_sim" exec="create" args="-topic /robot_description -x 1 -y 6" />
 
+  <!-- Spawn the robot in Gazebo -->
+
+
+  <!-- Bridge ROS 2 and Gazebo topics -->
   <node pkg="ros_gz_bridge" exec="parameter_bridge"
-        args="/model/diff_drive/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry
-              /model/diff_drive/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V
-              /model/diff_drive/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist
-              /scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan
-              /world/diff_drive/model/diff_drive/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model
-              /clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock"
-        >
-    <remap from="/model/diff_drive/odometry" to="/odom" />
-    <remap from="/model/diff_drive/cmd_vel" to="/cmd_vel" />
-    <remap from="/model/diff_drive/tf" to="/tf" />
-    <remap from="/world/diff_drive/model/diff_drive/joint_state" to="/joint_states"/>
-  </node>
+  args="/model/diff_drive/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry
+        /model/diff_drive/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V
+        /model/diff_drive/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist
+        /scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan
+        /world/diff_drive_world/model/diff_drive/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model
+        /clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock"
+  >
+<remap from="/model/diff_drive/odometry" to="/odom" />
+<remap from="/model/diff_drive/cmd_vel" to="/cmd_vel" />
+<remap from="/model/diff_drive/tf" to="/tf" />
+<remap from="/world/diff_drive_world/model/diff_drive/joint_state" to="/joint_states"/>
+</node>
 
-  <include file="$(find-pkg-share diff_drive)/ddrive_rviz.launch.py"/>
+  <node pkg="ros_gz_sim" exec="create" args="-topic /robot_description -entity diff_drive -x 1 -y 6 -z 0.23" />
 
+
+  <!-- Launch RViz for visualization -->
 </launch>

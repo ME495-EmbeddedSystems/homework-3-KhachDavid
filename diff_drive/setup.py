@@ -36,8 +36,9 @@ setup(
             'urdf/ddrive.urdf.xacro',
             'urdf/ddrive.gazebo.xacro',
             'config/view.rviz',
+            'env-hooks/diff_drive.dsv',
+            'colcon.pkg',
         ]),
-        ('share/' + package_name + '/env-hooks', ['env-hooks/diff_drive.dsv']),
 
         *recursive_files('share/' + package_name, 'models'),
         *recursive_files('share/' + package_name, 'worlds')

@@ -19,15 +19,6 @@ def generate_launch_description():
                               description='Only launch rviz'),
 
         Node(
-            package='rviz2',
-            executable='rviz2',
-            arguments=['-d',
-                       PathJoinSubstitution(
-                           [FindPackageShare('diff_drive'), 'view.rviz'])],
-            parameters=[{'use_sim_time': True}]
-        ),
-
-        Node(
             package='robot_state_publisher',
             executable='robot_state_publisher',
             parameters=[{
