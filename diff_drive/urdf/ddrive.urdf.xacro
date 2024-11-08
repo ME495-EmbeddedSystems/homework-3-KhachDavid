@@ -202,6 +202,5 @@
         <origin xyz="${s4 - 0.1} 0 -${s1}" rpy="0 0 0" />
     </joint>
 
-    <include file="$(find diff_drive)/urdf/ddrive.gazebo.xacro" />
-
+    <xacro:include filename="/home/david/cls/_ME495/src/hw3/src/diff_drive/urdf/ddrive.gazebo.xacro"/>
 </robot>
