@@ -34,8 +34,6 @@ class Flip(Node):
 
     def perform_flip(self):
         """Perform the flip."""
-        self.get_logger().info('Performing flip!')
-
         # Step 1: Accelerate forward
         self.move_robot(self.flip_velocity)
         time.sleep(self.flip_duration)
@@ -46,6 +44,10 @@ class Flip(Node):
 
         # Step 3: Accelerate backward to flip
         self.move_robot(-self.flip_velocity)
+        time.sleep(self.flip_duration)
+
+        # Step 4: Accelarate in random direction
+        self.move_random()
         time.sleep(self.flip_duration)
 
         # Step 4: Stop again briefly
@@ -64,6 +66,13 @@ class Flip(Node):
         twist = Twist()
         twist.linear.x = 0.0
         twist.angular.z = 0.0
+        self.publisher.publish(twist)
+
+    def move_random(self):
+        """Move the robot in a random direction."""
+        twist = Twist()
+        twist.linear.x = self.flip_velocity
+        twist.angular.z = self.flip_velocity
         self.publisher.publish(twist)
 
 
