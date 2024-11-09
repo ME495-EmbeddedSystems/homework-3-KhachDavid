@@ -1,17 +1,29 @@
 <?xml version="1.0"?>
 <robot name="diff_drive" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:property name="yaml_file" value="$(find diff_drive)/params.yaml"/>
+    <xacro:property name="props" value="${xacro.load_yaml(yaml_file)['/**']['ros__parameters']}"/>
 
-    <xacro:property name="pi_const" value="3.14159265" />
+    <xacro:property name="wheel_props" value="${props['wheel_dimensions']}"/>
+    <xacro:property name="caster_props" value="${props['caster_dimensions']}"/>
+    <xacro:property name="mass_props" value="${props['masses']}"/>
+    <xacro:property name="robot_props" value="${props['robot_dimensions']}"/>
 
     <!-- Body dimensions -->
-    <xacro:property name="a" value="1.0" /> <!-- Length -->
-    <xacro:property name="b" value="0.3" /> <!-- Height -->
-    <xacro:property name="c" value="0.6" /> <!-- Width -->
+    <xacro:property name="a" value="${robot_props['body_length']}" />
+    <xacro:property name="b" value="${robot_props['body_height']}" />
+    <xacro:property name="c" value="${robot_props['body_width']}" />
 
-    <!-- Wheel and caster dimensions -->
-    <xacro:property name="r" value="0.1" /> <!-- Radius for wheels and casters -->
-    <xacro:property name="wheel_radius" value="0.3" /> <!-- Radius for wheels and casters -->    
-    <xacro:property name="d" value="0.1" /> <!-- Thickness for wheels -->
+    <!-- Wheel dimensions -->
+    <xacro:property name="wheel_radius" value="${wheel_props['wheel_radius']}" />
+    <xacro:property name="d" value="${wheel_props['wheel_thickness']}" />
+
+    <!-- Caster dimensions -->
+    <xacro:property name="r" value="${caster_props['caster_radius']}" />
+    
+    <!-- Masses -->
+    <xacro:property name="m1" value="${mass_props['body_mass']}" />
+    <xacro:property name="m2" value="${mass_props['wheel_mass']}" />
+    <xacro:property name="m3" value="${mass_props['caster_mass']}" />
 
     <!-- Positions -->
     <xacro:property name="s1" value="${b/2}" />
@@ -19,11 +31,6 @@
     <xacro:property name="s3" value="${c/2}" />
     <xacro:property name="s4" value="${a/2}" />
     <xacro:property name="s5" value="${b/24}" />
-
-    <!-- Robot body mass and inertia properties -->
-    <xacro:property name="m1" value="1.0" /> <!-- Body mass -->
-    <xacro:property name="m2" value="10.0" /> <!-- Wheel mass -->
-    <xacro:property name="m3" value="1.0" /> <!-- Caster mass -->
 
     <xacro:macro name="inertia_body">
         <inertial>
@@ -184,6 +191,5 @@
         <child link="front_bottom_caster_link" />
         <origin xyz="${s4 - 0.1} 0 -${s1}" rpy="0 0 0" />
     </joint>
-
-    <xacro:include filename="/home/david/cls/_ME495/src/hw3/src/diff_drive/urdf/ddrive.gazebo.xacro"/>
+    <xacro:include filename="$(find diff_drive)/ddrive.gazebo.xacro"/>
 </robot>

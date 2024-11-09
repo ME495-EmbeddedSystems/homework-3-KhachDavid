@@ -1,8 +1,6 @@
 <launch>
   <!-- Specify the world file -->
   <arg name="world" default="ddrive.world.sdf" />
-  <arg name="rviz_config" default="view.rviz" description="RViz configuration file." />
-
   <include file="$(find-pkg-share diff_drive)/ddrive_rviz.launch.py" />
   <!-- ############### Begin_Citation [1] ############### -->
   <!-- Include the Gazebo Sim launch file -->
