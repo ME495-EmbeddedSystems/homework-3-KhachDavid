@@ -1,0 +1,11 @@
+__pycache__/
+cross_reference/
+docs_build/
+docs_output/
+.vscode/
+*.pyc
+*.pyo
+*.pyd
+build/
+install/
+logs/
