@@ -3,13 +3,13 @@
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 
+from launch.conditions import IfCondition
 
 from launch.substitutions import \
-    Command, EqualsSubstitution, PathJoinSubstitution, LaunchConfiguration
+    Command, EqualsSubstitution, LaunchConfiguration, PathJoinSubstitution
+
 
 from launch_ros.actions import Node
-
-from launch.conditions import IfCondition
 
 from launch_ros.substitutions import FindPackageShare
 
